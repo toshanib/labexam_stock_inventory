@@ -37,7 +37,8 @@ jobs:
             echo "Firebase configuration secret is missing."
             exit 1
           fi
-          printf '%s' "$FIREBASE_OPTIONS_DART" > lib/firebase_options.dart
+          printf '%s' "$FIREBASE_OPTIONS_DART" | base64 --decode > lib/firebase_options.dart
+          test -s lib/firebase_options.dart
 
       - name: Install dependencies
         run: flutter pub get
